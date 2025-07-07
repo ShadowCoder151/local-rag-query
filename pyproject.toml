@@ -1,0 +1,34 @@
+[project]
+name = "local-rag-query"
+version = "0.1.0"
+description = "A local RAG-based Desktop Application using open source LLMs for querying documents."
+authors = [
+    {name = "ShadowCoder151",email = "169095741+ShadowCoder151@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "llama-cpp-python @ file:///E:/local-rag-query/llama-cpp-python",
+    "sentence-transformers (>=5.0.0,<6.0.0)",
+    "faiss-cpu (>=1.11.0,<2.0.0)",
+    "pymupdf (>=1.26.3,<2.0.0)",
+    "langchain (>=0.3.26,<0.4.0)",
+    "pyqt6 (>=6.9.1,<7.0.0)",
+    "numpy (>=2.3.1,<3.0.0)",
+    "pyyaml (>=6.0.2,<7.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "rich (>=14.0.0,<15.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "^80.9.0"
+build = "^1.2.2.post1"
+wheel = "^0.45.1"
+ipykernel = "^6.29.5"
+python-dotenv = "^1.1.1"
+
