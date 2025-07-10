@@ -16,7 +16,10 @@ class Embedder:
 
         embeddings = self.model.encode(texts, show_progress_bar=True, convert_to_numpy=True)
 
-        return list(zip(embeddings, metas))
+        return [(embedding, {
+                "content": doc["content"],
+                "metadata": doc["metadata"]
+            }) for embedding, doc in zip(embeddings, docs)]
     
     def embed_query(self, query:str) -> np.ndarray:
         return self.model.encode(query, convert_to_numpy=True)

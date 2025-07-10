@@ -25,6 +25,6 @@ res = store.search(q_vec, k=3)
 
 
 
-pprint(embd[0])
-print(len(chk), len(embd))
-pprint(res)
+# pprint(embd[0])
+# print(len(chk), len(embd))
+pprint(sorted(res, key=lambda x:x["score"]))
