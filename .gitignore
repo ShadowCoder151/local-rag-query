@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 /llama-cpp-python
-/data
+data
