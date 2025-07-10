@@ -27,6 +27,3 @@ class Embedder:
 
 # embedder = Embedder()
 # embd = embedder.embed_docs(chk)
-
-# pprint(embd[0])
-# print(len(chk), len(embd))

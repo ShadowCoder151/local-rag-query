@@ -17,17 +17,17 @@ class VecStore:
         metadata = [m for _, m in data]
 
         self.index.add(vectors)
-        self.meta_Store.extend(metadata)
+        self.meta_store.extend(metadata)
 
     def search(self, query: np.ndarray, k:int = 5) -> List[Dict]:
         q_vec = np.array([query]).astype(np.float32)
         dist, idx = self.index.search(q_vec, k)
         res = []
 
-        for id in idx[0]:
-            if idx < len(self.meta_store):
-                temp = self.meta_store[idx].copy()
-                temp["score"] = float(dist[0][id])
+        for rank, i in enumerate(idx[0]):
+            if i < len(self.meta_store):
+                temp = self.meta_store[i].copy()
+                temp["score"] = float(dist[0][rank])
                 res.append(temp)
         
         return res
