@@ -11,7 +11,7 @@ A fully local RAG system built using Python, FAISS, and using open source models
 - [x] Retrieval and Prompt building
 - [x] LLM inference engine
 - [ ] CLI loop interface
-- [ ] Langchain orchestration
+- [x] Langchain orchestration
 - [ ] UI integration
 and more...
 
