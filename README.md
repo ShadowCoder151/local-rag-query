@@ -78,6 +78,7 @@ After downloading, copy it to the `models` folder
 ├── .gitignore
 ├── .venv/
 ├── app.py      # Main entry file
+├── run_chain.py      # Main entry file (with Langchain orchestration)
 ├── backend/    # LLM inference
 │   └── llm_backend.py
 ├── chat/       # Implementing later
@@ -101,6 +102,11 @@ After downloading, copy it to the `models` folder
 ├── rag/
 │   ├── prompt_build.py     # Chunks + query combined to give final prompt
 │   └── retriever.py       # Query -> top chunks (results)
+├── rag_chain/          # Modules (runnables) for lang chain orchestration
+│   ├── embed_runnable.py       # Embedder runnable
+│   └── llm_runnable.py         # LLM backend runnable
+│   └── prompt_runnable.py      # Prompt generator runnable
+│   └── vec_runnable.py         # Vector search runnbale
 ├── README.md
 ├── ui/         # UI implementing later
 │   └── ui.py
@@ -110,13 +116,13 @@ After downloading, copy it to the `models` folder
 
 ## Run the CLI version
 ```bash
-poetry run python app.py
+poetry run python run_chain.py
 ```
 ---
 
 ## Example result:
 ```bash
-Query: (modified in app.py and change the doc in data folder)
+Query: (modified in run_chain.py and change the doc in data folder)
 Response: In the context provided, "safety in pretraining" refers to the investigations and measures taken to ensure the safety and ethical implications of the data used during the pretraining phase of a language model like Llama 2-Chat....
 ```
 
