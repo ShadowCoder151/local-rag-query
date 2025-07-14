@@ -1,51 +1,24 @@
-from typing import List, Dict, Tuple
-from sentence_transformers import SentenceTransformer
-import numpy as np
-from ingest.loader import PDFLoad
-from ingest.chunker import DocChunk
+import gradio as gr
+from run_chain import final_chain
 
-from embed.embedder import Embedder
-from embed.vec_store import VecStore
+def chat_with_rag(query: str) -> str:
+    try:
+        return final_chain.invoke(query)
+    except Exception as e:
+        return f"[Error] {str(e)}"
 
-from rag.retriever import Retriever
-from rag.prompt_build import PromptBuilder
+with gr.Blocks(title="Local RAG Chatbot") as demo:
+    gr.Markdown("## 🧠 Local RAG Chatbot (no API, in-process)")
 
-from backend.llm_backend import LLM
+    with gr.Row():
+        chatbot = gr.Textbox(label="Chat History", interactive=False, lines=12)
+    query = gr.Textbox(label="Ask a question", placeholder="Type your query and hit enter...")
+    submit = gr.Button("Submit")
 
-from pprint import pprint
+    def handle_submit(q):
+        response = chat_with_rag(q)
+        return f"🧑 You: {q}\n🤖 Bot: {response}"
 
-# res = PDFLoad("data/test_doc.pdf")
-# chk = DocChunk(res)
+    submit.click(handle_submit, inputs=[query], outputs=[chatbot])
 
-embedder = Embedder()
-# embd = embedder.embed_docs(chk)
-
-# dim = embd[0][0].shape[0]
-# store = VecStore(dim=dim)
-# store.add_embed(embd)
-# store.save()
-
-
-store = VecStore(dim=384)
-store.load()
-
-
-query = "What is safety in pretraining?"
-ret = Retriever(embedder, store, 3)
-res = ret.retrieve(query)
-
-build = PromptBuilder()
-prompt = build.build_prompt(query, res)
-
-llm = LLM()
-response = llm.generate(prompt)
-
-# q_vec = embedder.embed_query(query)
-# res = store.search(q_vec, k=3)
-
-
-
-# pprint(embd[0])
-# print(len(chk), len(embd))
-# pprint(sorted(res, key=lambda x:x["score"]))
-print(f"Response: {response}")
+demo.launch()
